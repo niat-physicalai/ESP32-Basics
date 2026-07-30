@@ -103,19 +103,23 @@ Simply connect the ESP32 to your computer using the USB cable.
 ## Arduino Code
 
 ```cpp
-void setup()
-{
-    Serial.begin(115200);
+#define LED2 2  // Some board has on pin 2, some board has LED on pin 1
 
-//    Serial.println("Hello Hardware!");// Will print single time
+void setup() {
+  Serial.begin(115200);
+
+  //    Serial.println("Hello Hardware!");// Will print single time
+  pinMode(LED2, OUTPUT);
 }
 
-void loop()
-{
+void loop() {
 
-    Serial.println("Hello Hardware!");//Will print repeatedly
-    delay(1500);//With delay of 1.5 second
+  Serial.println("Hello Hardware!");  //Will print repeatedly
+  digitalWrite(LED2, HIGH);//Instruction to make the LED on
+  delay(100);  //This is in ms(miliseconds) With delay of 0.1 second, 1 second = 1000ms
 
+  digitalWrite(LED2, LOW);//Instruction to make the LED off
+  delay(900);// Delay of 0.9 second, and this will make the entire loop of 1 second
 }
 ```
 
@@ -148,11 +152,11 @@ Hello Hardware!
 
 ## Components Used
 
-| Component | Quantity |
-|-----------|----------|
+| Component | Quantity | Comment |
+|-----------|----------|---------|
 | ESP32 Development Board | 1 |
-| LED | 1 |
-| 220Ω Resistor | 1 |
+| LED | 1 | Traffic Light Model
+| 220Ω Resistor | 1 | In built in the light model
 | Active Buzzer | 1 |
 | Breadboard | 1 |
 | Jumper Wires | Few |
@@ -171,8 +175,11 @@ Hello Hardware!
 
 ---
 
-## Breadboard Internal Connection
+### Breadboard Internal Connection
 
+![ESP32 Wiring](https://raw.githubusercontent.com/niat-physicalai/ESP32-Basics/main/Breadboard_Anno.jpeg)
+
+### Step 1:
 
 
 
@@ -245,7 +252,7 @@ void loop()
 
 ---
 
-# Project 3 — Smart Light Control using Potentiometer
+# Project 3 — Smart Light Control using LDR
 
 ---
 
@@ -308,23 +315,23 @@ GPIO2 ---------------- LED ----220Ω---- GND
 ## Arduino Code
 
 ```cpp
-const int potPin = 34;
+const int LDRPin = 22;
 const int ledPin = 2;
 
 void setup()
 {
     pinMode(ledPin, OUTPUT);
-
+    pinMode(LDRPin, INPUT_PULLUP);
     Serial.begin(115200);
 }
 
 void loop()
 {
-    int sensorValue = analogRead(potPin);
+    int sensorValue = digitalRead(LDRPin);
 
     Serial.println(sensorValue);
 
-    if(sensorValue > 2000)
+    if(sensorValue == 1)//Logic can be changed
     {
         digitalWrite(ledPin, HIGH);
     }
