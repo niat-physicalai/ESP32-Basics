@@ -107,11 +107,15 @@ void setup()
 {
     Serial.begin(115200);
 
-    Serial.println("Hello Hardware!");
+//    Serial.println("Hello Hardware!");// Will print single time
 }
 
 void loop()
 {
+
+    Serial.println("Hello Hardware!");//Will print repeatedly
+    delay(1500);//With delay of 1.5 second
+
 }
 ```
 
@@ -166,6 +170,11 @@ Hello Hardware!
 | GND | Buzzer Negative |
 
 ---
+
+## Breadboard Internal Connection
+
+
+
 
 ## Block Diagram
 
