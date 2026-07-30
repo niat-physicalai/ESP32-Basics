@@ -332,6 +332,7 @@ void loop()
     Serial.println(sensorValue);
 
     if(sensorValue == 1)//Logic can be changed
+    
     {
         digitalWrite(ledPin, HIGH);
     }
